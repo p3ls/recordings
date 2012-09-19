@@ -1,16 +1,63 @@
 Recordings
 ============================================================
 
- Files
 
-/home/stef/Recording/recordings.sh
-/home/stef/Recording/recordings-metadata.sh
+A set of scripts for recording webradio.
 
-/home/stef/Recording/index.html
 
-/home/stef/Recording/csv
-/home/stef/Recording/csv/playlist.csv
+setup.sh
+---------
 
-/home/stef/Recording/mp3
-/home/stef/Recording/html
-/home/stef/Recording/jpg
+Generates everything that is needed for a new radio to be recorded.
+
+A config file must be passed.
+
+Project folder and subfolders.
+
+Tests the stream and determines used codec.
+
+
+
+record.sh
+---------
+
+Starts new recording.
+
+
+
+cover.sh
+---------
+
+Generates artistic cover.
+
+
+index.sh
+--------
+
+Generates html 5 page with audio players.
+
+
+metadata.sh
+-----------
+
+Webcrawler. Template for providing custom metadata to streamripper.
+
+
+sample.conf
+-----------
+
+Use this template when creating new config files for other radio stations. 
+
+
+
+
+Dependencies
+-------------
+
+streamripper
+mp3cut
+AtomicParsley
+EyeD3
+
+
+ 
