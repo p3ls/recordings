@@ -1,11 +1,12 @@
 #!/bin/bash
 #
-######################### dependencies ########################
+######################### reading config ######################
 ###############################################################
-# streamripper # eyeD3 # mp3cut (poc-streamer) # curl # html2text #
-###############################################################
-###################### EDIT ###################################
-###############################################################
+
+if [ -z $1 ] ; then echo 'pass a conf file as argument. exit.'; exit 0; fi
+
+echo "contents of config file: $1"
+
 
 name='P1 REVERSE'
 url='http://www.paris-one.com/pls/radio_v6.m3u'
@@ -25,6 +26,106 @@ mp3dir='mp3'
 id3_artist='www.paris-one.com'
 id3_year='2012'
 type='aac'
+
+
+title=''
+base_dir=''
+stream_dir='audio'
+cover_dir='img'
+log_dir='log'
+stream_format=''
+stream_url=''
+cover_url=''
+cover_path=''
+station_url=''
+metadata_script=''
+length_in_minutes=''
+
+# iterating lines in config file.
+
+while read i ; do
+ 
+  j=$(echo $i|cut -d'=' -f1)
+ 
+ #echo $j
+
+ # found title in config file
+ # create lower case project folder
+ # create upper case station title
+ if [ "$j" = "title" ] ; then
+  base_dir=$(echo $i|cut -d'=' -f2|sed 's/ /-/g'| tr '[:upper:]' '[:lower:]')
+  title=$(echo $i|cut -d'=' -f2|sed 's/-/ /g'| tr '[:lower:]' '[:upper:]')
+ fi
+
+
+ if [ "$j" = "stream_url" ] ; then
+  stream_url=$(echo $i|cut -d'=' -f2)
+ fi
+
+ if [ "$j" = "stream_format" ] ; then
+  stream_format=$(echo $i|cut -d'=' -f2)
+ fi
+
+
+ if [ "$j" = "cover_url" ] ; then
+  cover_url=$(echo $i|cut -d'=' -f2)
+  format=$(echo $cover_url|cut -d'.' -f4)  
+  cover_path="$base_dir/$cover_dir/null.$format"
+ fi
+
+ if [ "$j" = "station_url" ] ; then
+  station_url=$(echo $i|cut -d'=' -f2)
+ fi
+
+ if [ "$j" = "metadata_script" ] ; then
+  metadata_script=$(echo $i|cut -d'=' -f2)
+ fi
+
+
+ if [ "$j" = "length_in_minutes" ] ; then
+  length_in_minutes=$(echo $i|cut -d'=' -f2)
+ fi
+
+
+done < $1
+
+
+
+
+
+
+
+
+echo 'summary:'
+echo ''
+echo "base_dir        : $base_dir"
+echo "stream_dir      : $base_dir/$stream_dir"
+echo "cover_dir       : $base_dir/$cover_dir"
+echo "log_dir         : $base_dir/$log_dir"
+echo "stream_format   : $stream_format"
+echo "stream_url      : $stream_url"
+echo "cover_url       : $cover_url"
+echo "cover_path      : $cover_path"
+echo "station_url     : $station_url"
+
+echo ''
+
+
+exit 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # id3_album is MONTH XY
 # id3_title is FROM TIME TO TIME 
 ###############################################################
