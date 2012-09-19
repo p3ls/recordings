@@ -17,7 +17,9 @@ station_url=''
 metadata_script=''
 length_in_minutes=''
 
-mkdir "$base_dir/$stream_dir" "$base_dir/$log_dir"
+mkdir "$base_dir/$stream_dir" 
+mkdir "$base_dir/$log_dir"
+mkdir "$base_dir/$cover_dir"
 
 # iterating lines in config file.
 
@@ -63,8 +65,7 @@ while read i ; do
  if [ "$j" = "cover_url" ] ; then
   cover_url=$(echo $i|cut -d'=' -f2)
   format=$(echo $cover_url|cut -d'.' -f4)
-  echo "cover format: $format"
-  mkdir "$base_dir/$cover_dir"
+  
   cover_path="$base_dir/$cover_dir/null.$format"
   echo "downloading cover to... $cover_path"
   curl -o $cover_path $cover_url
