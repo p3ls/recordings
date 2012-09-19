@@ -17,9 +17,7 @@ station_url=''
 metadata_script=''
 length_in_minutes=''
 
-mkdir "$base_dir/$stream_dir" 
-mkdir "$base_dir/$log_dir"
-mkdir "$base_dir/$cover_dir"
+
 
 # iterating lines in config file.
 
@@ -37,6 +35,9 @@ while read i ; do
   title=$(echo $i|cut -d'=' -f2|sed 's/-/ /g'| tr '[:lower:]' '[:upper:]')
   echo "creating directory... $base_dir"
   mkdir $base_dir 
+  mkdir "$base_dir/$stream_dir" 
+  mkdir "$base_dir/$log_dir"
+  mkdir "$base_dir/$cover_dir"  
  fi
 
 
