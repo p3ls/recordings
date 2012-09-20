@@ -12,7 +12,7 @@ Generates everything that is needed for a new radio to be recorded.
 
 A config file must be passed.
 
-Project folder and subfolders.
+Generates project folder and subfolders.
 
 Tests the stream and determines used codec.
 
@@ -21,7 +21,9 @@ Tests the stream and determines used codec.
 record.sh
 ---------
 
-Starts new recording.
+Starts new recording session.
+
+A config file must be passed.
 
 
 
