@@ -1,0 +1,8 @@
+# streamripper output
+*.mp3
+*.cue
+*.txt
+*.playlist
+*.playlist2
+*.meta
+*.conf
